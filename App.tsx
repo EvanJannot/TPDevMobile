@@ -1,13 +1,25 @@
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 
 export default function App() {
   return (
     <View style={styles.container}>
       {/* <Text style={styles.textFont}>Hello World ;)</Text> */}
-      <View style={styles.squareRed}></View>
+      {/* <View style={styles.squareRed}></View>
       <View style={styles.squareOrange}></View>
-      <View style={styles.squareGreen}></View>
+      <View style={styles.squareGreen}></View> */}
+      <Image
+        style={styles.ensc}
+        source={{ uri: 'https://www.bpesquet.fr/images/ENSC.jpg' }}
+      />
+      <Image
+        style={styles.ensc}
+        source={{ uri: 'https://www.bpesquet.fr/images/ENSC.jpg' }}
+      />
+      <Image
+        style={styles.ensc}
+        source={{ uri: 'https://www.bpesquet.fr/images/ENSC.jpg' }}
+      />
       <StatusBar style="auto" />
     </View>
   )
@@ -18,8 +30,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     marginTop: 100,
-    marginBottom: 100,
-    alignItems: 'center',
+    flexDirection: 'column-reverse',
+    alignItems: 'flex-end',
     justifyContent: 'space-between',
   },
   textFont: {
@@ -40,5 +52,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
     height: 100,
     width: 100,
+  },
+  ensc: {
+    width: 108,
+    height: 75,
   },
 })
