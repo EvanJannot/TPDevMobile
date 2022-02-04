@@ -1,24 +1,33 @@
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
+
+const DATA = [
+  { id: 0, firstName: 'Benoit' },
+  { id: 1, firstName: 'Bernard' },
+  { id: 2, firstName: 'Jean-Marc A' },
+  { id: 3, firstName: 'Jérôme' },
+  { id: 4, firstName: 'Hervé' },
+  { id: 5, firstName: 'Jean-Marc S' },
+  { id: 6, firstName: 'Pierre-Alexandre' },
+  { id: 7, firstName: 'Edwige' },
+  { id: 8, firstName: 'Baptiste' },
+  { id: 9, firstName: 'Coralie' },
+]
 
 export default function App() {
+  const renderItem = ({ item }) => (
+    <View style={styles.item}>
+      <Text style={styles.font}>{item.firstName}</Text>
+    </View>
+  )
+
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <View style={styles.squareV}></View>
-        <ScrollView horizontal>
-          <View style={styles.squareH}></View>
-          <View style={styles.squareH}></View>
-          <View style={styles.squareH}></View>
-        </ScrollView>
-        <View style={styles.squareV}></View>
-        <View style={styles.squareV}></View>
-        <ScrollView horizontal>
-          <View style={styles.squareH}></View>
-          <View style={styles.squareH}></View>
-          <View style={styles.squareH}></View>
-        </ScrollView>
-      </ScrollView>
+      <FlatList
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+      ></FlatList>
     </View>
   )
 }
@@ -28,19 +37,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     flexDirection: 'column',
+    paddingTop: 60,
   },
-  squareV: {
-    width: 350,
-    height: 300,
-    backgroundColor: 'steelblue',
-    margin: 15,
-    marginLeft: 0,
-  },
-  squareH: {
-    width: 300,
-    height: 300,
+  item: {
     backgroundColor: 'skyblue',
-    margin: 15,
-    marginLeft: 0,
+    height: 80,
+    marginVertical: 4,
+    alignContent: 'center',
+    justifyContent: 'center',
+  },
+  font: {
+    fontSize: 32,
+    flexDirection: 'row',
   },
 })
