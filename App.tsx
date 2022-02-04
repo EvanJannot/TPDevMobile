@@ -18,9 +18,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     marginTop: 100,
-    flexDirection: 'row',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    marginBottom: 100,
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   textFont: {
     fontSize: 40,
