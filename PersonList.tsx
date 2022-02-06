@@ -12,18 +12,20 @@ class PersonList extends React.Component {
     super(props)
   }
 
+  renderItem = ({ item }) => (
+    <View style={styles.item}>
+      <Text style={styles.textFont}>
+        {item.firstName} {item.lastName.toUpperCase()}{' '}
+      </Text>
+    </View>
+  )
+
   render() {
     return (
       <View style={styles.container}>
         <FlatList
           data={this.props.DATA}
-          renderItem={({ item }) => (
-            <View style={styles.item}>
-              <Text style={styles.textFont}>
-                {item.firstName} {item.lastName.toUpperCase()}{' '}
-              </Text>
-            </View>
-          )}
+          renderItem={this.renderItem}
           keyExtractor={(item) => item.id.toString()}
         />
       </View>
@@ -36,13 +38,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     marginTop: 20,
-    width: '100%',
   },
 
   item: {
     backgroundColor: 'skyblue',
     marginTop: 5,
-    height: 40,
+    height: 80,
     justifyContent: 'center',
   },
 

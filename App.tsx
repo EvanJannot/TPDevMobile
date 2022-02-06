@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
-import PersonList, { Person } from './PersonList'
+import PersonList from './PersonList'
 
 const DATA = [
   { id: 0, firstName: 'Benoit', lastName: 'Leblanc' },
@@ -26,6 +26,7 @@ export default function App() {
     </View>
   )
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
