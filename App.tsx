@@ -6,8 +6,8 @@ interface CLassStateType {
 }
 
 export default class App extends Component<{}, CLassStateType> {
-  constructor() {
-    super({})
+  constructor(public props: string) {
+    super(props)
     this.state = {
       name: '',
     }
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     height: 80,
     fontSize: 25,
     justifyContent: 'center',
+    textAlign: 'center',
   },
   nameOutput: {
     marginTop: 20,
