@@ -24,7 +24,7 @@ export default class InputContainer extends Component<CLassPropsType, {}> {
           secureTextEntry={this.props.security}
           style={styles.input}
           placeholder={this.props.textForm}
-          onSubmitEditing={(event) => {
+          onChange={(event) => {
             this.props.modify(event.nativeEvent.text)
           }}
         ></TextInput>

@@ -3,11 +3,12 @@ import React, { Component } from 'react'
 import { StyleSheet, View, TouchableOpacity, Text, Alert } from 'react-native'
 
 interface classState {
-  login: Array<string>
+  login: string
+  password: string
 }
 
 export default class AuthForm extends Component<{}, classState> {
-  state: classState = { login: [] }
+  state: classState = { login: '', password: '' }
   displayAlert = (text: string) => {
     Alert.alert('Action Sélectionnée', text)
   }
@@ -15,14 +16,11 @@ export default class AuthForm extends Component<{}, classState> {
     this.displayAlert('Connexion avec le mail: ' + info)
   }
   changeLogin = (value: string) => {
-    let newLogin = [...this.state.login, value]
-    if (this.state.login.length > 2) {
-      this.state.login.splice(0, 2)
-      newLogin = [...this.state.login, value]
-      this.setState({ login: newLogin })
-    } else {
-      this.setState({ login: newLogin })
-    }
+    this.setState({ login: value })
+  }
+
+  changePassword = (value: string) => {
+    this.setState({ password: value })
   }
 
   render() {
@@ -38,12 +36,12 @@ export default class AuthForm extends Component<{}, classState> {
           security={true}
           textForm="mot de passe"
           imagePath={require('../assets/key.png')}
-          modify={this.changeLogin}
+          modify={this.changePassword}
         />
         <TouchableOpacity
           style={styles.button}
           onPress={() =>
-            this.sendForm(this.state.login[0] + '\n' + this.state.login[1])
+            this.sendForm(this.state.login + '\n' + this.state.password)
           }
         >
           <Text style={styles.textButton}>Se connecter</Text>
