@@ -1,5 +1,17 @@
+// set PATH=%PATH%;%APPDATA%\npm
+
 import React, { Component } from 'react'
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Image,
+  TouchableOpacity,
+} from 'react-native'
+import AuthForm from './components/AuthForm'
+import Input from './components/Input'
+import UserService from './services/authentication.service'
 
 interface CLassStateType {
   name: string
@@ -15,16 +27,33 @@ export default class App extends Component<{}, CLassStateType> {
   render() {
     return (
       <View style={styles.container}>
-        <TextInput
-          style={styles.input}
-          placeholder="Saisissez votre prénom"
-          onSubmitEditing={(Event) =>
-            this.setState({ name: Event.nativeEvent.text })
-          }
-        />
-        <Text style={styles.nameOutput}>
-          {this.state.name && `Bienvenue ${this.state.name}`}
-        </Text>
+        <Image style={styles.koala} source={require('./assets/koala.png')} />
+        <View style={styles.logoinput}>
+          <Image style={styles.at} source={require('./assets/at.png')} />
+          <TextInput
+            style={styles.input}
+            placeholder="email"
+            onSubmitEditing={(event) =>
+              alert(`Bonjour, ${event.nativeEvent.text} `)
+            }
+          ></TextInput>
+        </View>
+        <View style={styles.logoinput}>
+          <Image style={styles.key} source={require('./assets/key.png')} />
+          <TextInput
+            style={styles.input}
+            placeholder="mot de passe"
+            onSubmitEditing={(event) =>
+              alert(`Bonjour, ${event.nativeEvent.text} `)
+            }
+          ></TextInput>
+        </View>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => alert('Good job!')}
+        >
+          <Text>Se connecter</Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -33,22 +62,36 @@ export default class App extends Component<{}, CLassStateType> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#d3d3d3',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
   },
   input: {
-    height: 80,
+    height: 70,
+    width: 275,
     fontSize: 25,
     justifyContent: 'center',
-    textAlign: 'center',
   },
-  nameOutput: {
-    marginTop: 20,
-    fontSize: 18,
-    textAlign: 'center',
-    fontWeight: 'bold',
-    color: '#2980b9',
+  logoinput: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 35,
+    paddingLeft: 25,
+  },
+  koala: {
+    width: 108,
+    height: 75,
+  },
+  at: { marginRight: 15 },
+  key: { width: 50, height: 50, marginRight: 15 },
+  button: {
+    backgroundColor: 'skyblue',
+    height: 60,
+    width: 300,
+    borderRadius: 35,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })
