@@ -1,6 +1,13 @@
 import InputContainer from './Input'
 import React, { Component } from 'react'
-import { StyleSheet, View, TouchableOpacity, Text, Alert } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Text,
+  Alert,
+  Image,
+} from 'react-native'
 import UserService from '../services/authentication.service'
 import { User } from '../services/authentication.service'
 
@@ -34,6 +41,7 @@ export default class AuthForm extends Component<classProps, classState> {
   render() {
     return (
       <View style={styles.form}>
+        <Image style={styles.koala} source={require('./../assets/koala.png')} />
         <InputContainer
           security={false}
           textForm="email"
@@ -86,6 +94,12 @@ const styles = StyleSheet.create({
     borderRadius: 35,
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: 'center',
+  },
+  koala: {
+    width: 140,
+    height: 120,
+    marginBottom: 25,
     alignSelf: 'center',
   },
   alertContainer: {
