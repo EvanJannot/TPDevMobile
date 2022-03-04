@@ -10,7 +10,7 @@ import {
   Alert,
 } from 'react-native'
 import AuthForm from './components/AuthForm'
-import ModuleList from './services/module.service'
+import ModuleList from './components/ModuleList'
 
 export default class App extends Component<{}, {}> {
   displayAlert = (text: string) => {
@@ -19,8 +19,9 @@ export default class App extends Component<{}, {}> {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.koala} source={require('./assets/koala.png')} />
-        <AuthForm />
+        {/* <Image style={styles.koala} source={require('./assets/koala.png')} />
+        <AuthForm /> */}
+        <ModuleList />
       </View>
     )
   }
@@ -29,10 +30,10 @@ export default class App extends Component<{}, {}> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#d3d3d3',
+    backgroundColor: 'white',
     flexDirection: 'column',
-    justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 40,
   },
   koala: {
     width: 140,
