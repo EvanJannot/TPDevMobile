@@ -4,37 +4,57 @@ import {
   View,
   TouchableOpacity,
   Text,
-  Alert,
-  Touchable,
+  FlatList,
 } from 'react-native'
+
+import moduleService, { Module } from '../services/module.service'
+import ModuleItem from './ModuleItem'
 
 interface classState {
   pressed: boolean
+  modules: Array<Module>
 }
 
-export default class AuthForm extends Component<{}, classState> {
-  state: classState = { pressed: false }
+export default class ModuleList extends Component<{}, classState> {
+  state: classState = { pressed: false, modules: [] }
+
+  loadModules = () => {
+    moduleService.getAll().then((modules) => {
+      let displayedModules = modules
+      this.setState({ modules: displayedModules })
+    })
+  }
+
+  clearModules = () => {
+    this.setState({ modules: [] })
+  }
+
+  //   componentDidMount() {
+  //     this.loadModules()
+  //   }
+
   render() {
     return (
       <View>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => this.setState({ pressed: true })}
+          onPress={() => this.loadModules()}
         >
           <Text style={styles.textButton}>Afficher les modules</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => this.setState({ pressed: false })}
+          onPress={() => this.clearModules()}
         >
           <Text style={styles.textButton}>Effacer les modules</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => alert(this.state.pressed)}
-        >
-          <Text>Affiche state</Text>
-        </TouchableOpacity>
+        <FlatList<Module>
+          data={this.state.modules}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }: { item: Module }) => (
+            <ModuleItem module={item} />
+          )}
+        />
       </View>
     )
   }
