@@ -11,7 +11,7 @@ import {
 } from 'react-native'
 import AuthForm from './components/AuthForm'
 import { User } from './services/authentication.service'
-import ModuleList from './Components/ModuleList'
+import ModuleList from './components/ModuleList'
 
 interface classState {
   currentUser: User | null
