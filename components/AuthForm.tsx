@@ -2,19 +2,26 @@ import InputContainer from './Input'
 import React, { Component } from 'react'
 import { StyleSheet, View, TouchableOpacity, Text, Alert } from 'react-native'
 import UserService from '../services/authentication.service'
+import { User } from '../services/authentication.service'
 
 interface classState {
   login: string
   password: string
 }
 
-export default class AuthForm extends Component<{}, classState> {
+interface classProps {
+  onConnection: (loggedUser: User) => void
+}
+
+export default class AuthForm extends Component<classProps, classState> {
   state: classState = { login: '', password: '' }
   displayAlert = (text: string) => {
     Alert.alert('Action Sélectionnée', text)
   }
   sendForm = (info: string) => {
-    this.displayAlert('Connexion avec le mail: ' + info)
+    const user = UserService.authenticate(this.state.login, this.state.password)
+    if (user !== null) this.props.onConnection(user)
+    else this.displayAlert('Connexion avec le mail: ' + info)
   }
   changeLogin = (value: string) => {
     this.setState({ login: value })

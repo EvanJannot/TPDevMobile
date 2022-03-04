@@ -24,7 +24,9 @@ export default class ModuleList extends Component<{}, classState> {
     moduleService.getAll().then((modules) => {
       let displayedModules = modules
       if (['1A', '2A', '3A'].includes(this.state.year)) {
-        displayedModules = modules.filter((m) => m.year === this.state.year)
+        displayedModules = modules.filter(
+          (module) => module.year === this.state.year
+        )
       }
       this.setState({ modules: displayedModules })
     })
