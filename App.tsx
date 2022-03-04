@@ -10,7 +10,7 @@ import {
   Alert,
 } from 'react-native'
 import AuthForm from './components/AuthForm'
-import UserService from './services/authentication.service'
+import ModuleList from './services/module.service'
 
 export default class App extends Component<{}, {}> {
   displayAlert = (text: string) => {

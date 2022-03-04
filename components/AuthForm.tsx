@@ -1,6 +1,7 @@
 import InputContainer from './Input'
 import React, { Component } from 'react'
 import { StyleSheet, View, TouchableOpacity, Text, Alert } from 'react-native'
+import UserService from '../services/authentication.service'
 
 interface classState {
   login: string
@@ -41,7 +42,9 @@ export default class AuthForm extends Component<{}, classState> {
         <TouchableOpacity
           style={styles.button}
           onPress={() =>
-            this.sendForm(this.state.login + '\n' + this.state.password)
+            UserService.authenticate(this.state.login, this.state.password)
+              ? this.sendForm(this.state.login + '\n' + this.state.password)
+              : this.displayAlert('Identification erronée')
           }
         >
           <Text style={styles.textButton}>Se connecter</Text>
