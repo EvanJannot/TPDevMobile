@@ -5,22 +5,27 @@ import {
   TouchableOpacity,
   Text,
   FlatList,
+  TextInput,
 } from 'react-native'
 
 import moduleService, { Module } from '../services/module.service'
+import InputContainer from './Input'
 import ModuleItem from './ModuleItem'
 
 interface classState {
-  pressed: boolean
+  year: string
   modules: Array<Module>
 }
 
 export default class ModuleList extends Component<{}, classState> {
-  state: classState = { pressed: false, modules: [] }
+  state: classState = { modules: [], year: '' }
 
   loadModules = () => {
     moduleService.getAll().then((modules) => {
       let displayedModules = modules
+      if (['1A', '2A', '3A'].includes(this.state.year)) {
+        displayedModules = modules.filter((m) => m.year === this.state.year)
+      }
       this.setState({ modules: displayedModules })
     })
   }
@@ -36,6 +41,13 @@ export default class ModuleList extends Component<{}, classState> {
   render() {
     return (
       <View>
+        <TextInput
+          placeholder="Année (1A 2A ou 3A)"
+          style={styles.textInput}
+          onChange={(event) => {
+            this.setState({ year: event.nativeEvent.text })
+          }}
+        />
         <TouchableOpacity
           style={styles.button}
           onPress={() => this.loadModules()}
@@ -61,19 +73,27 @@ export default class ModuleList extends Component<{}, classState> {
 }
 
 const styles = StyleSheet.create({
-  listButton: { justifyContent: 'space-evenly' },
   textButton: {
     color: 'white',
     fontSize: 18,
   },
   button: {
     backgroundColor: 'skyblue',
-    height: 60,
+    height: 50,
     width: 375,
     borderRadius: 35,
     margin: 8,
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
+  },
+  textInput: {
+    height: 50,
+    width: 375,
+    fontSize: 25,
+    borderRadius: 20,
+    backgroundColor: 'lightgray',
+    alignSelf: 'center',
+    paddingLeft: 20,
   },
 })
