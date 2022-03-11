@@ -8,7 +8,7 @@ import {
   TextInput,
 } from 'react-native'
 
-export default class HomeScreen extends Component<{}, {}> {
+export default class Header extends Component<{}, {}> {
   render() {
     return (
       <View style={styles.container}>
@@ -21,7 +21,7 @@ export default class HomeScreen extends Component<{}, {}> {
 const styles = StyleSheet.create({
   title: { color: 'white', fontSize: 24, marginBottom: 20 },
   container: {
-    marginTop: 20,
+    marginTop: 30,
     alignItems: 'center',
     justifyContent: 'flex-end',
     height: 90,
