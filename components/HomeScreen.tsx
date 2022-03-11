@@ -10,18 +10,56 @@ import {
 import Header from './Header'
 import Input from './Input'
 import Footer from './Footer'
-import Todo from './TodoList'
+import TodoList from './TodoList'
+import todoServices, { Todo } from '../services/todo.service'
 
-export default class HomeScreen extends Component<{}, {}> {
+interface classState {
+  todo: Array<Todo>
+}
+
+export default class HomeScreen extends Component<{}, classState> {
+  state: classState = { todo: [] }
+
+  async loadTodos() {
+    const todo = await todoServices.getAll()
+    this.setState({ todo: todo })
+  }
+
+  addTodo = (task: string) => {
+    todoServices.add(task)
+    this.loadTodos()
+  }
+
+  removeTodo = (task: string) => {
+    todoServices.remove(task)
+    this.loadTodos()
+  }
+
+  toggleTodo = (task: string) => {
+    todoServices.toggle(task)
+    this.loadTodos()
+  }
+
+  removeCompleted = () => {
+    todoServices.removeCompleted()
+    this.loadTodos()
+  }
+
+  componentDidMount() {
+    this.loadTodos()
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <View>
-          <Header />
-          <Input />
-          <Todo />
-        </View>
-        <Footer />
+        <Header />
+        <Input onSubmitEditing={this.addTodo} />
+        <TodoList
+          todo={this.state.todo}
+          onDelete={this.removeTodo}
+          onToggle={this.toggleTodo}
+        />
+        <Footer onRemoveCompleted={this.removeCompleted} />
       </View>
     )
   }
@@ -29,7 +67,7 @@ export default class HomeScreen extends Component<{}, {}> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'space-between',
+    flex: 1,
   },
 })

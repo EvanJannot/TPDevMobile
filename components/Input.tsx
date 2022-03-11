@@ -8,13 +8,15 @@ import {
   TextInput,
 } from 'react-native'
 
-import service from '../services/todo.service'
-
 interface classState {
   search: string
 }
 
-export default class Input extends Component<{}, classState> {
+interface classProps {
+  onSubmitEditing: (task: string) => void
+}
+
+export default class Input extends Component<classProps, classState> {
   state: classState = { search: '' }
   render() {
     return (
@@ -22,11 +24,8 @@ export default class Input extends Component<{}, classState> {
         <TextInput
           style={styles.input}
           placeholder="Saisissez une nouvelle tâche"
-          onChange={(event) => {
-            this.setState({ search: event.nativeEvent.text })
-          }}
           onSubmitEditing={(event) => {
-            service.add(this.state.search)
+            this.props.onSubmitEditing(event.nativeEvent.text)
           }}
         ></TextInput>
       </View>

@@ -8,10 +8,17 @@ import {
   TextInput,
 } from 'react-native'
 
-export default class Footer extends Component<{}, {}> {
+interface classProps {
+  onRemoveCompleted: () => void
+}
+
+export default class Footer extends Component<classProps, {}> {
   render() {
     return (
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={this.props.onRemoveCompleted}
+      >
         <Text style={styles.text}>Supprimer les tâches terminées</Text>
       </TouchableOpacity>
     )
