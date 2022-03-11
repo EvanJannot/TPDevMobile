@@ -13,7 +13,7 @@ interface classState {
 }
 
 interface classProps {
-  onSubmitEditing: (task: string) => void
+  onSubmitEditing: Function
 }
 
 export default class Input extends Component<classProps, classState> {

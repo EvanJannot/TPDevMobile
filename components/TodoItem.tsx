@@ -12,8 +12,8 @@ import { Todo } from '../services/todo.service'
 
 interface classProps {
   todo: Todo
-  onDelete: (task: string) => void
-  onToggle: (task: string) => void
+  onDelete: Function
+  onToggle: Function
 }
 
 export default class TodoItem extends Component<classProps, {}> {
