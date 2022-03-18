@@ -1,3 +1,5 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 export interface Todo {
   task: string
   completed: boolean
@@ -6,16 +8,21 @@ export interface Todo {
 class TodoService {
   private todos: Array<Todo> = []
 
-  // Return all todos asynchronously. Returns a Promise
-  getAll(): Promise<Array<Todo>> {
-    return new Promise((resolve) => {
-      resolve(this.todos)
-    })
-  }
-
   add(task: string) {
     // Add new todo at beginning of array
-    this.todos = [{ task, completed: false }, ...this.todos]
+    const todo = { task, completed: false }
+    AsyncStorage.setItem(task, JSON.stringify(todo))
+    this.todos = [todo, ...this.todos]
+  }
+
+  // Return all todos asynchronously. Returns a Promise
+  async getAll(): Promise<Array<Todo>> {
+    const keys = await AsyncStorage.getAllKeys()
+    const jsonTodos = await AsyncStorage.multiGet(keys)
+    return jsonTodos.map((item) => JSON.parse(item[1]))
+    // return new Promise((resolve) => {
+    //   resolve(this.todos)
+    // })
   }
 
   remove(task: string) {
